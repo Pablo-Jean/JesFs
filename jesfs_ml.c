@@ -52,21 +52,30 @@ int16_t sflash_interpret_id(uint32_t id){
         // Keep Flash-ID for optional Analysis
 	sflash_info.identification=id;
 
-        if(id==0x000000) return -144; // ShortCircuit/Sleep in SPI?
-        if(id==0xFFFFFF) return -145; // Unconnected in SPI?
+    if(id==0x000000) return -144; // ShortCircuit/Sleep in SPI?
+    if(id==0xFFFFFF) return -145; // Unconnected in SPI?
 
-	switch(id>>8){   // Check Without Density
-	default:
-		return -104;    // Unknown ID/Type (!!: e.g. Micron has otherTypes th. Macronix, but identical Fkts (Quiescent Current for Macronix is the lowest..)
+    switch(id>>8){   // Check Without Density
+    default:
+//      return -104;    // Unknown Type (!!: e.g. Micron has otherTypes th. Macronix, but identical Fkts (Quiescent Current for Macronix is the lowest..)
+        sflash_info.total_flash_size = 0x40000;
+        break;
 
-	// List of tested/knownAsGood Flash-Manufacturer/IDs (see Header File).  Others may be added later
-	case MACRONIX_MANU_TYP_RX: // Macronix - The 1MB-Version is on the TI CC1310 Launchpad, 2-16 MB on LTraX, ..
-        case GIGADEV_MANU_TYP_WD: // GigaDevice up to 8Mbit
-        case GIGADEV_MANU_TYP_WQ: // GigaDevice >= 2Mbit
+    case ADESTO_MANU_2MB_TYP:
+        sflash_info.total_flash_size = 0x40000;
+        break;      // OK!
+    case ADESTO_MANU_4MB_TYP:
+        sflash_info.total_flash_size = 0x40000;
+        break;      // OK!
+    case ADESTO_MANU_8MB_TYP:
+        sflash_info.total_flash_size = 0x40000;
+        break;      // OK!
+    case ADESTO_MANU_16MB_TYP:
+        sflash_info.total_flash_size = 0x40000;
+        break;      // OK!
+    }
 
-	    // ...add others...
-		break;      // OK!
-	}
+    return 0;
 
 #ifdef DEBUG_FORCE_MINIDISK_DENSITY
 	h=DEBUG_FORCE_MINIDISK_DENSITY; // MiniDisc >= 2 Sectors Minimum

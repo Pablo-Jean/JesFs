@@ -99,6 +99,14 @@ extern "C"{
 #define GIGADEV_MANU_TYP_WD     0xC864  // GigaDevices (same as MX25R, e.g. GD25WD80C)
 #define GIGADEV_MANU_TYP_WQ     0xC865  // GigaDevices (same as MX25R,e.g. GD25WQ64E)
 
+#define ADESTO_MANU_2MB_TYP     0x01861F // Adesto AT25SF with 2MB
+#define ADESTO_MANU_4MB_TYP     0x01871F // Adesto AT25SF with 4MB
+#define ADESTO_MANU_8MB_TYP     0x01881F // Adesto AT25SF with 8MB
+#define ADESTO_MANU_16MB_TYP    0x01891F // Adesto AT25SF with 16MB
+
+#define WINBOND_MANU_8MB_TYP    0x1740EF
+#define WINBOND_MANU_16MB_TYP   0x1840EF
+
 //------------------- Area for User Settings END -------------------------------
 
 
