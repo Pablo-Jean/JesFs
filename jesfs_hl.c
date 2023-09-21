@@ -323,8 +323,11 @@ int16_t fs_start(uint8_t mode) {
     return -108;
   if (sflash_info.databuf.u32[0] != HEADER_MAGIC)
     return -146;
-  if (sflash_info.databuf.u32[1] != sflash_info.identification)
-    return -109;
+  if (sflash_info.databuf.u32[1] != sflash_info.identification){
+      // I will ignore this for preventing a fault only because
+      // the system can't read the ID
+      //return -109;
+  }
 
   sflash_info.creation_date = sflash_info.databuf.u32[2]; // Creation date must be anyting different from 0xFFFFFFFF
 
